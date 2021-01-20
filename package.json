@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/Christianlopez4/platzi-social-network/issues"
   },
-  "homepage": "https://github.com/Christianlopez4/platzi-social-network#readme"
+  "homepage": "https://github.com/Christianlopez4/platzi-social-network#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
