@@ -1,0 +1,24 @@
+{
+  "name": "platzi-social-network",
+  "version": "0.1.0",
+  "description": "Proyecto del curso práctico de Node.js de Platzi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Christianlopez4/platzi-social-network.git"
+  },
+  "keywords": [
+    "backend",
+    "Node.js",
+    "express"
+  ],
+  "author": "Christian Felipe López Cleves",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Christianlopez4/platzi-social-network/issues"
+  },
+  "homepage": "https://github.com/Christianlopez4/platzi-social-network#readme"
+}
