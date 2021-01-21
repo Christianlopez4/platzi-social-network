@@ -1,4 +1,5 @@
 const TABLE = 'auth';
+const auth = require('../../../auth');
 
 module.exports = function (injectedStore) {
 
@@ -8,6 +9,7 @@ module.exports = function (injectedStore) {
         store = require('../../../store/dummy');
     }
 
+    //Crear un usuario solo para la autenticación
     function  upsert(data) {
         const authData = {
             id: data.id
@@ -24,8 +26,21 @@ module.exports = function (injectedStore) {
         return store.upsert(TABLE, authData);
     }
 
+    async function login(username, password) {
+        const data = await store.query(TABLE, {username: username});
+
+        //Valido que la contraseña ingresada sea la que se encuentra almacenada
+        if (data.password == password) {
+            //generar token
+            return auth.sign(data);
+        } else {
+            throw new Error('Información inválida');
+        }
+    }
+
     return {
-        upsert
+        upsert,
+        login
     }
 
 }
