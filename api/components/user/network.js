@@ -28,7 +28,7 @@ function get(req, res) {
 };
 
 function add(req, res) {
-    controller.addUser(req.body)
+    controller.upsertUser(req.body)
         .then( user => {
             response.success(req, res, user, 201);
         })
