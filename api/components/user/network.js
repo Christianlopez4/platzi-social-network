@@ -9,34 +9,28 @@ router.get('/:id', get);
 router.post('/', add);
 router.put('/', secure('update'), add);
 
-function list (req, res)  {
+function list (req, res, next)  {
     controller.listUsers()
         .then( list => {
             response.success(req, res, list);
         })
-        .catch( err => {
-            response.error(req, res, err.message);
-        });
+        .catch(next);
 };
 
-function get(req, res) {
+function get(req, res, next) {
     controller.getUser(req.params.id)
         .then( user => {
             response.success(req, res, user);
         })
-        .catch( err => {
-            response.error(req, res, err.message);
-        });
+        .catch(next);
 };
 
-function add(req, res) {
+function add(req, res, next) {
     controller.upsertUser(req.body)
         .then( user => {
             response.success(req, res, user, 201);
         })
-        .catch( err => {
-            response.error(req, res, err.message);
-        })
+        .catch(next)
 }
 
 module.exports = router;
