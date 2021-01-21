@@ -22,8 +22,10 @@
   },
   "homepage": "https://github.com/Christianlopez4/platzi-social-network#readme",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "swagger-ui-express": "^4.1.6"
   }
 }
