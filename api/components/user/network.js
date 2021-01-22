@@ -8,6 +8,7 @@ router.get('/', list);
 router.get('/:id', get);
 router.post('/', add);
 router.put('/', secure('update'), add);
+router.post('/follow/:id', secure('follow'), follow);
 
 function list (req, res, next)  {
     controller.listUsers()
@@ -31,6 +32,14 @@ function add(req, res, next) {
             response.success(req, res, user, 201);
         })
         .catch(next)
+}
+
+function follow(req, res, next) {
+    controller.followUser(req.user.id, req.params.id)
+        .then(data => {
+            response.success(req, res, data, 201);
+        })
+        .catch(next);
 }
 
 module.exports = router;

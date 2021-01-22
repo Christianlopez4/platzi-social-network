@@ -15,6 +15,9 @@ const check = {
         if (decoded.id !== owner) {
             throw error('No puedes hacer esto', 401);
         }
+    },
+    logged: function (req) {
+        const decoded = decodeHeader(req);
     }
 }
 
@@ -37,7 +40,7 @@ function decodeHeader(req) {
     const token = getToken(authorization);
     const decoded = verify(token);
 
-    req.user = decoded;
+    req.user = decoded.data;
     return decoded.data;
 }
 

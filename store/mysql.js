@@ -72,13 +72,26 @@ function insert(table, data) {
     });
 }
 
-function upsert(table, data) {
+async function upsert(table, data) {
+    let row =[];
+
+    if(data.id) {
+        row = await get(table, data.id);
+    }
+
+    if (row.length === 0) {
+        return insert(table, data);
+    } else {
+        return update(table, data);
+    }
+    /*
     let user = get(table, data.id);
     if (user) {
         return update(table, data);
     } else {
         return insert(table, data);
     }
+    */
 }
 
 function update(table, data) {
