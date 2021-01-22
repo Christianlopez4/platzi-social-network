@@ -118,9 +118,26 @@ function query(table, q) {
     })
 }
 
+function following(table, id) {
+    return new Promise ((resolve, reject) => {
+        connection.query(`
+        SELECT ur.* FROM platzi_social.${table} AS uf
+        INNER JOIN platzi_social.user AS ur
+        ON uf.user_to = ur.id
+        WHERE uf.user_from = ${id}`, (err, data) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        })
+    })
+}
+
 module.exports = {
     list,
     get,
     upsert,
-    query
+    query,
+    following
 }

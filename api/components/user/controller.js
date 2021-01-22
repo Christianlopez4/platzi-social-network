@@ -42,10 +42,15 @@ module.exports = function (injectedStore) {
         });
     }
 
+    function following(id) {
+        return store.following(TABLE + "_follow", id);
+    }
+
     return {
         listUsers,
         getUser,
         upsertUser,
-        followUser
+        followUser,
+        following
     }
 }
