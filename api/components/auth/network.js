@@ -10,7 +10,8 @@ function login(req, res) {
         .then( token => {
             response.success(req, res, token);
         })
-        .catch( () => {
+        .catch( (err) => {
+            console.error(err);
             response.error(req, res, 'Información inválida', 400);
         });
 }

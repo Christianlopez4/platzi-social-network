@@ -28,15 +28,14 @@ module.exports = function (injectedStore) {
 
         return store.upsert(TABLE, authData);
     }
-
+    
     async function login(username, password) {
         const data = await store.query(TABLE, {username: username});
-
         //compara con los sistemas de criptografía y cifrado si las passwords son la misma, sin comparar texto plano
-        return bcrypt.compare(password, data.password)
+        return await bcrypt.compare(password, data.password)
             .then( sonIguales => {
                 //Valido que la contraseña ingresada sea la que se encuentra almacenada
-                if (sonIguales) {
+                if (sonIguales == true) {
                     //generar token
                     return auth.sign(data);
                 } else {

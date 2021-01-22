@@ -5,7 +5,7 @@ const secret = config.jwt.secret;
 const error = require('../utils/error');
 
 function sign(data) {
-    return jwt.sign(data, secret);
+    return jwt.sign({data}, secret);
 }
 
 const check = {
@@ -15,6 +15,9 @@ const check = {
         if (decoded.id !== owner) {
             throw error('No puedes hacer esto', 401);
         }
+    },
+    logged: function (req) {
+        const decoded = decodeHeader(req);
     }
 }
 
@@ -37,8 +40,8 @@ function decodeHeader(req) {
     const token = getToken(authorization);
     const decoded = verify(token);
 
-    req.user = decoded;
-    return decoded;
+    req.user = decoded.data;
+    return decoded.data;
 }
 
 module.exports = {

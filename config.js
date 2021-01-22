@@ -4,5 +4,11 @@ module.exports = {
     },
     jwt: {
         secret: 'notasecreta!'
+    },
+    mysql: {
+        host: 'localhost',
+        user: 'root',
+        password: '05sistemas26CH',
+        database: 'platzi_social',
     }
 }
