@@ -48,6 +48,66 @@ function list(table) {
     });
 }
 
+function get(table, id) {
+    return new Promise( (resolve, reject) => {
+        connection.query(`SELECT * FROM ${table} WHERE id = ${id}`, (err, data) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
+    });
+}
+
+function insert(table, data) {
+    return new Promise( (resolve, reject) => {
+        connection.query(`INSERT INTO ${table} SET ?`, data, (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+}
+
+function upsert(table, data) {
+    let user = get(table, data.id);
+    if (user) {
+        return update(table, data);
+    } else {
+        return insert(table, data);
+    }
+}
+
+function update(table, data) {
+    return new Promise( (resolve, reject) => {
+        connection.query(`UPDATE ${table} SET ? WHERE id=?`, [data, data.id], (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+}
+
+function query(table, q) {
+    return new Promise ((resolve, reject) => {
+        connection.query(`SELECT * FROM ${table} WHERE ?`, q, (err, res) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(res[0] || null);
+            }
+        })
+    })
+}
+
 module.exports = {
-    list
+    list,
+    get,
+    upsert,
+    query
 }

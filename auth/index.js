@@ -5,7 +5,7 @@ const secret = config.jwt.secret;
 const error = require('../utils/error');
 
 function sign(data) {
-    return jwt.sign(data, secret);
+    return jwt.sign({data}, secret);
 }
 
 const check = {
@@ -38,7 +38,7 @@ function decodeHeader(req) {
     const decoded = verify(token);
 
     req.user = decoded;
-    return decoded;
+    return decoded.data;
 }
 
 module.exports = {
