@@ -10,5 +10,9 @@ module.exports = {
         user: 'root',
         password: '05sistemas26CH',
         database: 'platzi_social',
+    },
+    mysqlService: {
+        host: 'localhost',
+        port: 3001
     }
 }
