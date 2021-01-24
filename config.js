@@ -14,5 +14,8 @@ module.exports = {
     mysqlService: {
         host: 'localhost',
         port: 3001
+    },
+    post: {
+        port: 3002
     }
 }
